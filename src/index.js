@@ -5,6 +5,8 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+const route = require('./routes/index');
+
 app.use(express.urlencoded({
     extended: true
 }));
@@ -21,9 +23,8 @@ app.set('views', path.join(__dirname, 'resources\\views'));
 app.use(morgan('combined'));
 
 //routes
-app.get('/', (req, res) => {
-    res.render('home');
-})
+route(app);
+
 
 //app listen port
 app.listen(port, () => {
