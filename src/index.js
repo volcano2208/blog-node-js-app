@@ -10,9 +10,7 @@ const route = require('./routes/index');
 //connect to db
 db.connect();
 
-app.use(express.urlencoded({
-    extended: true
-}));
+
 app.use(express.json());
 //use static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,11 +23,14 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 //HTTP logger
 app.use(morgan('combined'));
 
-//routes
-route(app);
 
 
 //app listen port
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 })
+//routes
+route(app);
+app.use(express.urlencoded({
+    extended: false,
+}));
